@@ -1,0 +1,8 @@
+chemical_shifts/*
+!chemical_shifts/.gitkeep
+
+pdbs/*
+!pdbs/.gitkeep
+
+# Keeps the file empty, as it should be for a new build 
+completed_conversions.txt
