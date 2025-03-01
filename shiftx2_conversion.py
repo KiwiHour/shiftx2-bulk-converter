@@ -151,9 +151,15 @@ def convert_pdb_file_to_cs_csv(pdb_file: TextIO, total_converted: int):
     print("Completed!")
 
 if __name__ == "__main__":
+    
+    # Create completed conversions file if it does note exist
+    if not os.path.exists(completed_conversions_file_path):
+        with open(completed_conversions_file_path, "w") as completed_conversions_file:
+            print("Created completed conversions file")
+            completed_conversions_file.write("")
 
     all_pdb_file_paths = os.listdir(input_pdbs_dir)
-    pdb_file_paths, no_removed_paths = remove_completed_conversion_paths(all_pdb_file_paths[:100])
+    pdb_file_paths, no_removed_paths = remove_completed_conversion_paths(all_pdb_file_paths)
     
     # Total completed starts at the number of removed paths (since removed paths are ones already completed)
     total_converted = no_removed_paths
