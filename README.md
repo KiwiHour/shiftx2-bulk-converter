@@ -1,5 +1,5 @@
 ## Brief description
-This is a program that will bulk convert .PDB (protein databank) files into CSV chemical shift data \
+This is a program that will bulk convert .PDB (protein databank) files into chemical shift data \
 It uses ShiftX2 via python's request library 
 
 ## How to use
