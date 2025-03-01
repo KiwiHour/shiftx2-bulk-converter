@@ -30,16 +30,16 @@ HEADERS = {
 }
 
 def create_body(
-    pdb_contents: str,
-    filename: str,
-    deuterate: bool = False,
-    pH: float = 5,
-    temperature_k: int = 298,
-    phosphorylated: bool = False,
-    shift_type: Literal["all"] | Literal["backbone"] | Literal["side"] = "all",
-    output_format: Literal["tabular"] | Literal["csv"] | Literal["nmr_star"] | Literal["nef"] = "tabular",
-    use_shifty: bool = True,
-    analyse_non_overlap_chains: bool = False
+        pdb_contents: str,
+        filename: str,
+        deuterate: bool = False,
+        pH: float = 5,
+        temperature_k: int = 298,
+        phosphorylated: bool = False,
+        shift_type: Literal["all"] | Literal["backbone"] | Literal["side"] = "all",
+        output_format: Literal["tabular"] | Literal["csv"] | Literal["nmr_star"] | Literal["nef"] = "tabular",
+        use_shifty: bool = True,
+        analyse_non_overlap_chains: bool = False
     ):
     
     return f"""
