@@ -8,9 +8,9 @@ input_pdbs_dir_name = "ecoli_proteome" # Directory which contains all the .pdb f
 cs_csv_output_dir_name = "ecoli" # The output directory in which all the .pdb.cs.csv files will go
 
 # Do not touch
-input_pdbs_dir = os.join("./pdbs", input_pdbs_dir_name)
-output_chemical_shifts_dir = os.join("./chemical_shifts", cs_csv_output_dir_name)
-total_pdb_files = len(os.listdir(input_pdbs_dir_name))
+input_pdbs_dir = os.path.join("./pdbs", input_pdbs_dir_name)
+output_chemical_shifts_dir = os.path.join("./chemical_shifts", cs_csv_output_dir_name)
+total_pdb_files = len(os.listdir(input_pdbs_dir))
 completed_conversions_file_path = "completed_conversions.txt"
 
 URL = "http://www.shiftx2.ca/cgi-bin/shiftx2.cgi"
@@ -152,13 +152,13 @@ def convert_pdb_file_to_cs_csv(pdb_file: TextIO, total_converted: int):
 
 if __name__ == "__main__":
 
-    all_pdb_file_paths = os.listdir(input_pdbs_dir_name)
+    all_pdb_file_paths = os.listdir(input_pdbs_dir)
     pdb_file_paths, no_removed_paths = remove_completed_conversion_paths(all_pdb_file_paths[:100])
     
     # Total completed starts at the number of removed paths (since removed paths are ones already completed)
     total_converted = no_removed_paths
 
     for pdb_file_path in pdb_file_paths:
-        with open(os.path.join(input_pdbs_dir_name, pdb_file_path), "r") as pdb_file:
+        with open(os.path.join(input_pdbs_dir, pdb_file_path), "r") as pdb_file:
             convert_pdb_file_to_cs_csv(pdb_file=pdb_file, total_converted=total_converted)
             total_converted += 1
