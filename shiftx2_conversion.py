@@ -37,10 +37,12 @@ def create_body(
         temperature_k: int = 298,
         phosphorylated: bool = False,
         shift_type: Literal["all"] | Literal["backbone"] | Literal["side"] = "all",
-        output_format: Literal["tabular"] | Literal["csv"] | Literal["nmr_star"] | Literal["nef"] = "tabular",
         use_shifty: bool = True,
         analyse_non_overlap_chains: bool = False
     ):
+    
+    # extraction method only works with the CSV format, you are welcome to modify the regex and adjust this code
+    output_format = "csv"
     
     return f"""
 ------geckoformboundary
@@ -130,7 +132,7 @@ def convert_pdb_file_to_cs_csv(pdb_file: TextIO, total_converted: int):
     
     # Collect PDB file contents and build the POST request to ShiftX2
     pdb_contents = pdb_file.read()
-    body = create_body(pdb_contents, pdb_file_path, shift_type="backbone", output_format="csv")
+    body = create_body(pdb_contents, pdb_file_path, shift_type="backbone")
     res = requests.post(
         url=URL,
         headers=HEADERS,
