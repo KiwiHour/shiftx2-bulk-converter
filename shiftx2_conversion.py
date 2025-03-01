@@ -5,11 +5,11 @@ from typing import Literal, TextIO
 
 # Configurable
 input_pdbs_dir_name = "ecoli_proteome" # Directory which contains all the .pdb files
-cs_csv_output_dir_name = "ecoli" # The output directory in which all the .pdb.cs.csv files will go
+output_dir_name = "ecoli" # The output directory in which all the .pdb.cs.csv files will go
 
 # Do not touch
 input_pdbs_dir = os.path.join("./pdbs", input_pdbs_dir_name)
-output_chemical_shifts_dir = os.path.join("./chemical_shifts", cs_csv_output_dir_name)
+output_chemical_shifts_dir = os.path.join("./chemical_shifts", output_dir_name)
 total_pdb_files = len(os.listdir(input_pdbs_dir))
 completed_conversions_file_path = "completed_conversions.txt"
 
@@ -141,7 +141,7 @@ def convert_pdb_file_to_cs_csv(pdb_file: TextIO, total_converted: int):
     cs_csv_data = extract_cs_csv_data_from_response(res)
     
     # Save the chemical shift csv data to output directory
-    with open(os.path.join("chemical_shifts", cs_csv_output_dir_name, f"{pdb_file_path}.cs.csv"), "w") as cs_csv_file:
+    with open(os.path.join("chemical_shifts", output_dir_name, f"{pdb_file_path}.cs.csv"), "w") as cs_csv_file:
         cs_csv_file.write(cs_csv_data)
     
     # Log that that PDB file has been converted
@@ -151,6 +151,14 @@ def convert_pdb_file_to_cs_csv(pdb_file: TextIO, total_converted: int):
     print("Completed!")
 
 if __name__ == "__main__":
+    
+    # Check input directory exists
+    if not os.path.exists(input_pdbs_dir):
+        raise Exception(f"Input directory {input_pdbs_dir} does not exist")
+
+    # Check output directory exists. If not, make it
+    if not os.path.exists(output_chemical_shifts_dir):
+        os.mkdir(output_chemical_shifts_dir)
     
     # Create completed conversions file if it does note exist
     if not os.path.exists(completed_conversions_file_path):
